@@ -1,4 +1,4 @@
-import streamlit as  st
+import streamlit as st
 import numpy as np
 import pandas as pd
 import joblib
@@ -101,7 +101,9 @@ def main():
 
     else:
         st.subheader("About")
-        add_page_visited_details("About",datetime.now())
+        with sqlite3.connect('data/data.db') as conn:
+            data = view_all_prediction_details(conn.cursor())
+            st.table(pd.DataFrame(data))
 
 
 if __name__ == "__main__":
